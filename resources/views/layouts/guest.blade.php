@@ -14,15 +14,24 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+    <body class="font-sans antialiased">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0"
+             style="background: linear-gradient(135deg, #0f0f1a 0%, #1a1130 100%);">
+
+            <!-- Logo / Brand -->
+            <div class="mb-6 text-center">
+                <a href="/" class="inline-block">
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-5xl">🎬</span>
+                        <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent tracking-wide">
+                            CineVerse
+                        </h1>
+                    </div>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <!-- Card -->
+            <div class="w-full sm:max-w-md px-8 py-8 bg-white/5 backdrop-blur-sm border border-white/10 sm:rounded-2xl shadow-2xl">
                 {{ $slot }}
             </div>
         </div>

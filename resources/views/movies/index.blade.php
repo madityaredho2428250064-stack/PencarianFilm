@@ -1,20 +1,14 @@
-@extends('layouts.app')
-@section('content')
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
-            🎬 CineVerse - Daftar Film
-        </h2>
-    </x-slot>
-
+<x-app-layout>
+ 
     <div class="py-8" style="background: linear-gradient(135deg, #0f0f1a 0%, #1a1130 100%); min-height: 100vh;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
+ 
             @if (session('success'))
                 <div class="mb-4 p-4 rounded-lg bg-green-600/20 border border-green-500 text-green-300">
                     {{ session('success') }}
                 </div>
             @endif
-
+ 
             <!-- Header & Action -->
             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
                 <div>
@@ -23,7 +17,7 @@
                     </h1>
                     <p class="text-gray-400 mt-1">Temukan film favoritmu di CineVerse</p>
                 </div>
-
+ 
                 @auth
                     @if (auth()->user()->hasRole('admin'))
                         <a href="{{ route('movies.create') }}"
@@ -33,14 +27,14 @@
                     @endif
                 @endauth
             </div>
-
+ 
             <!-- Filter & Search -->
             <form method="GET" action="{{ route('movies.index') }}"
                   class="flex flex-col md:flex-row gap-3 mb-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
                 <input type="text" name="search" value="{{ request('search') }}"
                        placeholder="Cari judul film..."
                        class="flex-1 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition">
-
+ 
                 <select name="genre"
                         class="rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 px-4 py-2 focus:ring-2 focus:ring-purple-500 outline-none transition">
                     <option value="">Semua Genre</option>
@@ -50,12 +44,12 @@
                         </option>
                     @endforeach
                 </select>
-
+ 
                 <button type="submit"
                         class="px-6 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all">
                     Cari
                 </button>
-
+ 
                 @if (request('search') || request('genre'))
                     <a href="{{ route('movies.index') }}"
                        class="px-6 py-2 rounded-lg bg-gray-700 text-gray-200 font-semibold hover:bg-gray-600 transition-all text-center">
@@ -63,7 +57,7 @@
                     </a>
                 @endif
             </form>
-
+ 
             <!-- Movie Grid -->
             @if ($movies->count() > 0)
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -77,11 +71,11 @@
                                     <span class="text-5xl">🎞️</span>
                                 @endif
                             </div>
-
+ 
                             <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-bold text-yellow-400 flex items-center gap-1">
                                 ⭐ {{ number_format($movie->rating_avg, 1) }}
                             </div>
-
+ 
                             <div class="p-3">
                                 <h3 class="font-semibold text-gray-100 text-sm truncate group-hover:text-purple-300 transition">
                                     {{ $movie->title }}
@@ -89,7 +83,7 @@
                                 <p class="text-xs text-gray-500 mt-1">
                                     {{ $movie->release_date ? \Carbon\Carbon::parse($movie->release_date)->format('Y') : '-' }}
                                 </p>
-
+ 
                                 @if ($movie->genres->count() > 0)
                                     <div class="flex flex-wrap gap-1 mt-2">
                                         @foreach ($movie->genres->take(2) as $genre)
@@ -103,7 +97,7 @@
                         </a>
                     @endforeach
                 </div>
-
+ 
                 <div class="mt-8">
                     {{ $movies->links() }}
                 </div>
@@ -113,7 +107,8 @@
                     <p class="text-gray-400 text-lg">Belum ada film yang ditemukan.</p>
                 </div>
             @endif
-
+ 
         </div>
     </div>
-@endsection
+</x-app-layout>
+ 

@@ -9,7 +9,7 @@ class WatchlistController extends Controller
 {
     public function index()
     {
-        $watchlists = auth()->user()->watchlists()->with('movie')->latest()->get();
+        $watchlists = auth()->user()->watchlists()->with('movie.genres')->latest()->get();
         return view('watchlists.index', compact('watchlists'));
     }
 
@@ -45,6 +45,4 @@ class WatchlistController extends Controller
         return back()->with('success', 'Film dihapus dari watchlist!');
     }
 
-    public function create() {}
-    public function edit(Watchlist $watchlist) {}
 }

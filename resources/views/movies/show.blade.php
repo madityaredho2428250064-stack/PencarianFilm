@@ -14,6 +14,12 @@
                 </div>
             @endif
 
+            @if (session('error'))
+                <div class="mb-4 p-4 rounded-lg bg-red-600/20 border border-red-500 text-red-300">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <!-- Movie Detail Card -->
             <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-2xl mb-8">
                 <div class="flex flex-col md:flex-row gap-0">

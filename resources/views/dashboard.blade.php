@@ -1,17 +1,9 @@
 
-@extends('layouts.app')
-
-@section('header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        📊 Dashboard Admin
-    </h2>
-@endsection
-
-@section('content')
-
+<x-app-layout>
+ 
     <div class="py-8" style="background: linear-gradient(135deg, #0f0f1a 0%, #1a1130 100%); min-height: 100vh;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
+ 
             <!-- Stat Cards -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div class="bg-gradient-to-br from-purple-600/30 to-purple-900/30 border border-purple-500/30 rounded-2xl p-5 backdrop-blur-sm">
@@ -35,33 +27,33 @@
                     <p class="text-orange-400 text-xs mt-2">📋 Item watchlist</p>
                 </div>
             </div>
-
+ 
             <!-- Charts Row 1 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-
+ 
                 <!-- Bar Chart: Film per Genre -->
                 <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                     <h3 class="text-lg font-bold text-white mb-4">🎭 Film per Genre</h3>
                     <canvas id="genreChart" height="200"></canvas>
                 </div>
-
+ 
                 <!-- Line Chart: Review per Bulan -->
                 <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                     <h3 class="text-lg font-bold text-white mb-4">📈 Ulasan per Bulan</h3>
                     <canvas id="reviewChart" height="200"></canvas>
                 </div>
-
+ 
             </div>
-
+ 
             <!-- Chart Row 2 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+ 
                 <!-- Pie Chart: Distribusi Rating -->
                 <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                     <h3 class="text-lg font-bold text-white mb-4">⭐ Distribusi Rating</h3>
                     <canvas id="ratingChart" height="200"></canvas>
                 </div>
-
+ 
                 <!-- Quick Links -->
                 <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                     <h3 class="text-lg font-bold text-white mb-4">⚡ Aksi Cepat</h3>
@@ -82,26 +74,24 @@
 </a>
                     </div>
                 </div>
-
+ 
             </div>
-
+ 
         </div>
     </div>
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
     <script>
         // Data dari Laravel
         const genreLabels = @json($genreData->pluck('name'));
         const genreCounts = @json($genreData->pluck('movies_count'));
-
+ 
         const monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
         const reviewMonths = @json($reviewsPerMonth->pluck('month'));
         const reviewCounts = @json($reviewsPerMonth->pluck('total'));
-
+ 
         const ratingLabels = @json($ratingData->pluck('rating'));
         const ratingCounts = @json($ratingData->pluck('total'));
-
+ 
         // Bar Chart - Genre
         new Chart(document.getElementById('genreChart'), {
             type: 'bar',
@@ -130,7 +120,7 @@
                 }
             }
         });
-
+ 
         // Line Chart - Review per Bulan
         new Chart(document.getElementById('reviewChart'), {
             type: 'line',
@@ -155,7 +145,7 @@
                 }
             }
         });
-
+ 
         // Pie Chart - Rating
         new Chart(document.getElementById('ratingChart'), {
             type: 'doughnut',
@@ -182,4 +172,5 @@
             }
         });
     </script>
-@endsection
+</x-app-layout>
+ 
